@@ -33,14 +33,14 @@ public class WelcomeController {
     private String TITLE = "";
 
 
-    @GetMapping("/welcome")
+    @GetMapping("/")
     public String welcome(Map<String, Object> model) {
         model.put("title", TITLE);
         model.put("message", MESSAGE);
         return "welcome";
     }
 
-    @GetMapping
+    @GetMapping("/testor")
     public String testor(Map<String, Object> model) {
         Iterable<Message> messages = messageRepo.findAll();
 
@@ -48,7 +48,7 @@ public class WelcomeController {
         return "testor";
     }
 
-    @PostMapping
+    @PostMapping(value = "/testor")
     public String add(@RequestParam String text, @RequestParam String tag,
                       Map<String, Object> model) {
         Message message = new Message(text, tag);
