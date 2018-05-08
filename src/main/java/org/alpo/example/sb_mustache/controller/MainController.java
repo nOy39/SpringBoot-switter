@@ -10,11 +10,8 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
-import sun.awt.ModalExclude;
 
-import java.util.List;
 import java.util.Map;
 
 /**
@@ -42,15 +39,21 @@ public class MainController {
         return "welcome";
     }
 
-    @GetMapping("/testor")
-    public String testor(Map<String, Object> model) {
-        Iterable<Message> messages = messageRepo.findAll();
+    @GetMapping("/main")
+    public String testor(@RequestParam(required = false) String filter, Model model) {
+        Iterable<Message> messages;
 
-        model.put("messages", messages);
-        return "testor";
+        if (filter != null && !filter.isEmpty()) {
+            messages = messageRepo.findByTagOrTextContainingIgnoreCase(filter,filter);
+        } else {
+            messages = messageRepo.findAll();
+        }
+        model.addAttribute("messages", messages);
+        model.addAttribute("filter", filter);
+        return "main";
     }
 
-    @PostMapping(value = "/testor")
+    @PostMapping(value = "/main")
     public String add(
             @AuthenticationPrincipal User user,
             @RequestParam String text,
@@ -63,20 +66,7 @@ public class MainController {
 
         model.put("messages", messages);
 
-        return "testor";
+        return "main";
     }
 
-    @PostMapping(value = "filter")
-    public String filter(@RequestParam String filter, Map<String, Object> model){
-        Iterable<Message> messages;
-        if (filter != null && !filter.isEmpty()) {
-            messages = messageRepo.findByTagOrTextContainingIgnoreCase(filter,filter);
-        } else {
-            messages = messageRepo.findAll();
-        }
-
-        model.put("messages", messages);
-
-        return "testor";
-    }
 }
