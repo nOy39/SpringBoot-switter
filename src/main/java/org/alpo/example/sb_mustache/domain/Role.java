@@ -1,5 +1,7 @@
 package org.alpo.example.sb_mustache.domain;
 
+import org.springframework.security.core.GrantedAuthority;
+
 /**
  * Created by
  *
@@ -7,6 +9,11 @@ package org.alpo.example.sb_mustache.domain;
  * @Date 07.05.2018
  * @Time 20:59
  */
-public enum Role {
+public enum Role implements GrantedAuthority {
     USER;
+
+    @Override
+    public String getAuthority() {
+        return name();
+    }
 }
