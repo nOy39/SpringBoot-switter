@@ -22,7 +22,7 @@ import java.util.Map;
  * @Time 14:53
  */
 @Controller
-public class WelcomeController {
+public class MainController {
     @Autowired
     private MessageRepo messageRepo;
 

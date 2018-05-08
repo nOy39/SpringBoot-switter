@@ -6,13 +6,18 @@
     <!--<link rel="stylesheet" type="text/css" href="webjars/bootstrap/4.1.0/css/bootstrap.min.css" />-->
 </head>
 <body>
-<form action="/login" method="post">
+Add new User
+<div>
+{{#message}}
+    <h3 style="color: red">{{message}}</h3>
+    {{/message}}
+</div>
+<form action="/registration" method="post">
     <div><label> User Name : <input type="text" name="username"/> </label></div>
     <div><label> Password: <input type="password" name="password"/> </label></div>
     <input type="hidden" name="_csrf" value="{{_csrf.token}}"/>
     <div><input type="submit" value="Sign In"/></div>
+    <a href="/">welcome page</a>
 </form>
-<a href="/registration">Registration user</a>
-<a href="/">welcome page</a>
 </body>
 </html>
