@@ -4,6 +4,7 @@
 <@c.page>
 <div>
     <@l.logout />
+
 </div>
 <div>
     <form method="post">

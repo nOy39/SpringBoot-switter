@@ -10,7 +10,7 @@ import org.springframework.security.core.GrantedAuthority;
  * @Time 20:59
  */
 public enum Role implements GrantedAuthority {
-    USER;
+    USER, ADMIN, GUEST;
 
     @Override
     public String getAuthority() {
