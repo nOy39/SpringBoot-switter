@@ -1,6 +1,9 @@
 <#import "parts/common.ftl" as c>
 <@c.page>
-<span><a href="/users">List of Users</a> </span>
-<h1>Hello User</h1>
-<a href="/main">Testor Page</a>
+<h5>Hello guest</h5>
+<div>
+    <span>
+        This is simple clone twitters, for learning working with Spring Boot.
+    </span>
+</div>
 </@c.page>
