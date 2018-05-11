@@ -47,6 +47,9 @@
             <div class="card-footer text-muted">
                 ${message.authorName}
             </div>
+            <div>
+                <a href="/welcome" class="btn btn-outline-secondary ml-3">Подробнее</a>
+            </div>
         </div>
     </div>
 
