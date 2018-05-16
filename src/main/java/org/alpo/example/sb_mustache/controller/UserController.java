@@ -69,4 +69,11 @@ public class UserController {
 
         return "redirect:/user/profile";
     }
+
+    @GetMapping(value = "/delete/{user}")
+    public String userDeleteForm(@PathVariable User user, Model model) {
+
+        userService.deleteUser(user);
+        return "redirect:/users";
+    }
 }
