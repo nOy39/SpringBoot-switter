@@ -17,14 +17,26 @@
             Add new Message
         </a>
 
-        <div class="collapse" id="collapseExample">
+        <div class="collapse <#if message??>show</#if>" id="collapseExample">
             <div class="form-group my-3">
-                <form method="post" enctype="multipart/form-data">
+                <form method="post" action="/main" enctype="multipart/form-data">
                     <div class="form-group">
-                        <input type="text" name="text" class="form-control" placeholder="Input message"/>
+                        <input type="text" name="text" class="form-control ${(textError??)?string('is-invalid','')}"
+                               value="<#if message??>${message.text}</#if>" placeholder="Input message"/>
+                        <#if textError??>
+                        <div class="invalid-feedback">
+                            ${textError}
+                        </div>
+                        </#if>
                     </div>
                     <div class="form-group">
-                        <input type="text" name="tag" class="form-control" placeholder="#tag">
+                        <input type="text" class="form-control"
+                               value="<#if message??>${message.tag}</#if>" name="tag" placeholder="#tag">
+                        <#if tagError??>
+                           <div class="invalid-feedback">
+                            ${tagError}
+                           </div>
+                        </#if>
                     </div>
                     <div class="custom-file">
                         <input type="file" name="file" id="customFile">
@@ -58,25 +70,25 @@
 
                     <!-- Modal -->
                     <form action="/main" method="post">
-                    <div class="modal fade" id="exampleModalCenter" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
-                        <div class="modal-dialog modal-dialog-centered" role="document">
-                            <div class="modal-content">
-                                <div class="modal-header">
-                                    <h5 class="modal-title" id="exampleModalCenterTitle">Modal title</h5>
-                                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                                        <span aria-hidden="true">&times;</span>
-                                    </button>
-                                </div>
-                                <div class="modal-body">
-                                    Message will be deleted. Are you sure?
-                                </div>
-                                <div class="modal-footer">
+                        <div class="modal fade" id="exampleModalCenter" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
+                            <div class="modal-dialog modal-dialog-centered" role="document">
+                                <div class="modal-content">
+                                    <div class="modal-header">
+                                        <h5 class="modal-title" id="exampleModalCenterTitle">Modal title</h5>
+                                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                            <span aria-hidden="true">&times;</span>
+                                        </button>
+                                    </div>
+                                    <div class="modal-body">
+                                        Message will be deleted. Are you sure?
+                                    </div>
+                                    <div class="modal-footer">
                                         <button type="button" class="btn btn-secondary my-3" data-dismiss="modal">Close</button>
-                                        <button type="button" class="btn btn-primary my-3" name="delete">Delete message</button>
+                                        <a href="/delete/${message.id}" class="btn btn-outline-danger ml-3">Delete message</a>
+                                    </div>
                                 </div>
                             </div>
                         </div>
-                    </div>
                 </div>
             </div>
         </div>

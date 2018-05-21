@@ -1,6 +1,9 @@
 package org.alpo.example.sb_mustache.domain;
 
+import org.hibernate.validator.constraints.Length;
+
 import javax.persistence.*;
+import javax.validation.constraints.NotBlank;
 
 /**
  * Created by @author OGI aka nOy39
@@ -15,7 +18,12 @@ public class Message {
     @GeneratedValue(strategy = GenerationType.AUTO)
     private long id;
 
+    @NotBlank(message = "Please fill the message")
+    @Length(max = 2048, message = "Message to long(more than 2048 bytes")
     private String text;
+
+    @NotBlank(message = "Please fill the tag")
+    @Length(max = 255, message = "Message to long(more than 2048 bytes")
     private String tag;
 
     @ManyToOne(fetch = FetchType.EAGER)
