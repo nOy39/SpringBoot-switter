@@ -20,6 +20,7 @@ import javax.validation.Valid;
 import java.io.File;
 import java.io.IOException;
 import java.util.Map;
+import java.util.Set;
 import java.util.UUID;
 import java.util.stream.Collector;
 import java.util.stream.Collectors;
@@ -111,6 +112,19 @@ public class MainController {
     public String userDeleteForm(@PathVariable Message message, Model model) {
         messageRepo.deleteById(message.getId());
         return "redirect:/main";
+    }
+
+    @GetMapping(value = "/user-messages/{user}")
+    public String userMessage(@AuthenticationPrincipal User currentUser,
+                              @PathVariable User user,
+                              Model model,
+                              @RequestParam Message message) {
+        Set<Message> messages = user.getMessages();
+
+        model.addAttribute("messages",messages);
+        model.addAttribute("message", message);
+        model.addAttribute("isCurrentUser",currentUser.equals(user));
+        return "userMessages";
     }
 
 }
